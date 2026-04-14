@@ -5,24 +5,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>👑 مملكة أركانوس VIP</title>
 
-	<!-- خط عربي قريب من شكل الصور -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=El+Messiri:wght@400;600;700&display=swap" rel="stylesheet">
 
 	<style>
 		:root{
-			--bg:#070606;
-			--card:rgba(20,14,10,.72);
-			--stroke:rgba(255, 215, 0, .16);
-			--stroke2:rgba(255, 215, 0, .28);
-			--gold:#f3d48b;
-			--gold2:#d7a94b;
-			--text:#e9e3da;
-			--muted:rgba(233,227,218,.72);
+			--bg:#040611;
+			--card:rgba(10,14,28,.74);
+
+			--stroke:rgba(88, 164, 255, .16);
+			--stroke2:rgba(88, 164, 255, .30);
+
+			--accent:#78c6ff;
+			--accent2:#3c7dff;
+			--accent3:#8b5cf6;
+
+			--text:#e9f2ff;
+			--muted:rgba(233,242,255,.72);
+
 			--shadow: 0 18px 55px rgba(0,0,0,.55);
 			--radius: 22px;
 			--radius2: 18px;
+
+			--glow: 0 0 28px rgba(120,198,255,.25), 0 0 60px rgba(60,125,255,.16);
 		}
 
 		*{box-sizing:border-box}
@@ -35,37 +41,85 @@
 			overflow-x:hidden;
 		}
 
-		/* خلفية قريبة من الصور */
+		/* خلفية أنمي GIF */
+		.animeBackdrop{
+			position:fixed; inset:0;
+			z-index:-8;
+			pointer-events:none;
+			background-image:url('https://i.gifer.com/Ajkf.gif');
+			background-size:cover;
+			background-position:center;
+			opacity:.30; /* ✅ كما طلبت */
+			filter: saturate(1.15) contrast(1.05);
+		}
+
+		/* طبقة تعتيم */
+		.dim{
+			position:fixed; inset:0;
+			z-index:-7;
+			pointer-events:none;
+			background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.70));
+		}
+
+		/* طبقة نيون متحركة */
 		.bg{
 			position:fixed; inset:0;
+			z-index:-6;
 			background:
-				radial-gradient(1200px 700px at 80% -10%, rgba(255,215,0,.10), transparent 60%),
-				radial-gradient(900px 520px at 10% 20%, rgba(255,215,0,.07), transparent 58%),
-				linear-gradient(180deg, #030303 0%, #090705 30%, #050505 100%);
-			z-index:-4;
+				radial-gradient(1200px 700px at 75% -10%, rgba(60,125,255,.18), transparent 60%),
+				radial-gradient(900px 520px at 15% 20%, rgba(120,198,255,.13), transparent 58%),
+				radial-gradient(700px 420px at 10% 85%, rgba(139,92,246,.10), transparent 60%);
 		}
 		.bg::before{
 			content:"";
 			position:absolute; inset:-30%;
-			background: linear-gradient(-45deg, rgba(255,215,0,.10), rgba(255,255,255,0), rgba(255,215,0,.06), rgba(255,255,255,0));
-			filter: blur(25px);
-			opacity:.55;
-			animation: bgMove 14s ease-in-out infinite;
+			background: linear-gradient(-45deg,
+				rgba(120,198,255,.18),
+				rgba(255,255,255,0),
+				rgba(60,125,255,.16),
+				rgba(255,255,255,0),
+				rgba(139,92,246,.12)
+			);
+			filter: blur(28px);
+			opacity:.60;
+			animation: bgMove 12s ease-in-out infinite;
+			transform: translateZ(0);
 		}
 		@keyframes bgMove{
 			0%{transform:translate3d(-2%, -2%, 0) rotate(0deg)}
-			50%{transform:translate3d(2%, 1%, 0) rotate(6deg)}
+			50%{transform:translate3d(2%, 1%, 0) rotate(7deg)}
 			100%{transform:translate3d(-2%, -2%, 0) rotate(0deg)}
 		}
 
-		/* هيدر علوي */
+		/* نجوم خفيفة */
+		.stars{
+			position:fixed; inset:0;
+			z-index:-5;
+			pointer-events:none;
+			opacity:.70;
+			background-image:
+				radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.9), transparent 60%),
+				radial-gradient(1px 1px at 42% 38%, rgba(255,255,255,.6), transparent 60%),
+				radial-gradient(1px 1px at 65% 22%, rgba(120,198,255,.9), transparent 60%),
+				radial-gradient(1px 1px at 78% 62%, rgba(255,255,255,.65), transparent 60%),
+				radial-gradient(1px 1px at 25% 78%, rgba(139,92,246,.85), transparent 60%),
+				radial-gradient(1px 1px at 88% 14%, rgba(255,255,255,.75), transparent 60%),
+				radial-gradient(1px 1px at 8% 60%, rgba(255,255,255,.7), transparent 60%);
+			animation: starsFloat 8s ease-in-out infinite;
+		}
+		@keyframes starsFloat{
+			0%,100%{transform:translate3d(0,0,0)}
+			50%{transform:translate3d(0,-8px,0)}
+		}
+
+		/* هيدر */
 		header{
 			position:sticky; top:0;
 			z-index:50;
 			padding:14px 14px 10px;
-			background:rgba(0,0,0,.58);
+			background:rgba(0,0,0,.52);
 			backdrop-filter: blur(10px);
-			border-bottom:1px solid rgba(255,215,0,.10);
+			border-bottom:1px solid rgba(120,198,255,.12);
 		}
 		.topRow{
 			display:flex;
@@ -75,27 +129,25 @@
 			max-width:980px;
 			margin:0 auto;
 		}
-
 		.menuBtn{
 			width:44px; height:44px;
 			border-radius:14px;
-			border:1px solid rgba(255,215,0,.14);
-			background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-			color:var(--gold);
+			border:1px solid rgba(120,198,255,.20);
+			background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+			color:var(--accent);
 			display:grid;
 			place-items:center;
 			box-shadow: 0 10px 30px rgba(0,0,0,.35);
 			cursor:pointer;
+			transition: transform .15s ease, border-color .15s ease;
 		}
-		.menuIcon{
-			width:18px;
-			height:12px;
-			position:relative;
-		}
+		.menuBtn:hover{ transform: translateY(-1px); border-color: rgba(120,198,255,.32); }
+		.menuIcon{ width:18px; height:12px; position:relative; }
 		.menuIcon span{
 			position:absolute; left:0; right:0;
 			height:2px; border-radius:10px;
-			background:rgba(243,212,139,.95);
+			background:rgba(120,198,255,.95);
+			box-shadow: 0 0 18px rgba(120,198,255,.25);
 		}
 		.menuIcon span:nth-child(1){top:0}
 		.menuIcon span:nth-child(2){top:5px; opacity:.85}
@@ -107,19 +159,21 @@
 			gap:10px;
 			padding:8px 12px;
 			border-radius:999px;
-			border:1px solid rgba(255,215,0,.14);
-			background:rgba(0,0,0,.26);
+			border:1px solid rgba(120,198,255,.18);
+			background:rgba(0,0,0,.22);
+			box-shadow: var(--glow);
 		}
 		.brand b{
 			font-family:"El Messiri","Cairo",serif;
 			font-weight:700;
-			color:var(--gold);
+			color:var(--accent);
 			letter-spacing:.2px;
+			text-shadow: 0 0 18px rgba(120,198,255,.25);
 		}
 		.brand small{
 			display:block;
 			font-size:12px;
-			color:rgba(233,227,218,.70);
+			color:rgba(233,242,255,.70);
 			margin-top:2px;
 			line-height:1;
 		}
@@ -127,9 +181,10 @@
 			width:34px; height:34px;
 			border-radius:12px;
 			display:grid; place-items:center;
-			border:1px solid rgba(255,215,0,.22);
-			background: radial-gradient(circle at 30% 30%, rgba(255,215,0,.22), rgba(0,0,0,.12));
-			color:var(--gold);
+			border:1px solid rgba(120,198,255,.22);
+			background: radial-gradient(circle at 30% 30%, rgba(120,198,255,.20), rgba(0,0,0,.12));
+			color:var(--accent);
+			box-shadow: var(--glow);
 		}
 
 		main{
@@ -138,13 +193,12 @@
 			padding:18px 14px 40px;
 		}
 
-		/* شاشة هيرو مثل الصورة الأولى */
 		.hero{
 			position:relative;
 			padding:22px 18px 18px;
 			border-radius:var(--radius);
-			background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-			border:1px solid rgba(255,215,0,.12);
+			background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+			border:1px solid rgba(120,198,255,.14);
 			box-shadow: var(--shadow);
 			overflow:hidden;
 		}
@@ -152,9 +206,24 @@
 			content:"";
 			position:absolute; inset:-1px;
 			background:
-				radial-gradient(600px 220px at 50% 0%, rgba(255,215,0,.12), transparent 65%),
-				radial-gradient(260px 260px at 85% 35%, rgba(255,215,0,.10), transparent 62%);
+				radial-gradient(620px 240px at 50% 0%, rgba(120,198,255,.16), transparent 65%),
+				radial-gradient(280px 280px at 88% 35%, rgba(60,125,255,.16), transparent 62%),
+				radial-gradient(240px 220px at 12% 70%, rgba(139,92,246,.10), transparent 62%);
 			pointer-events:none;
+		}
+		.hero::after{
+			content:"";
+			position:absolute; inset:-2px;
+			background: linear-gradient(90deg, transparent, rgba(120,198,255,.18), transparent);
+			transform: translateX(-60%);
+			animation: shine 3.6s ease-in-out infinite;
+			opacity:.35;
+			pointer-events:none;
+		}
+		@keyframes shine{
+			0%{ transform: translateX(-60%); }
+			55%{ transform: translateX(60%); }
+			100%{ transform: translateX(60%); }
 		}
 
 		.pill{
@@ -163,27 +232,29 @@
 			gap:10px;
 			padding:8px 14px;
 			border-radius:999px;
-			border:1px solid rgba(255,215,0,.14);
-			background:rgba(0,0,0,.24);
-			color:rgba(243,212,139,.95);
-			font-weight:700;
+			border:1px solid rgba(120,198,255,.18);
+			background:rgba(0,0,0,.22);
+			color:rgba(120,198,255,.95);
+			font-weight:800;
 			font-size:13px;
 			position:relative;
 			z-index:1;
+			box-shadow: var(--glow);
 		}
 
 		.heroTitle{
 			font-family:"El Messiri","Cairo",serif;
 			font-size:44px;
 			margin:14px 0 8px;
-			color:var(--gold);
+			color:var(--accent);
 			letter-spacing:.6px;
 			position:relative;
 			z-index:1;
+			text-shadow: 0 0 26px rgba(120,198,255,.25);
 		}
 		.heroDesc{
 			margin:0;
-			color:rgba(233,227,218,.72);
+			color:rgba(233,242,255,.76);
 			line-height:1.9;
 			font-size:15px;
 			position:relative;
@@ -201,17 +272,16 @@
 		.dividerRow .line{
 			height:1px;
 			flex:1;
-			background:linear-gradient(90deg, transparent, rgba(255,215,0,.28), transparent);
+			background:linear-gradient(90deg, transparent, rgba(120,198,255,.40), transparent);
 		}
 		.dividerRow .diamond{
 			width:9px; height:9px;
 			transform: rotate(45deg);
-			background:rgba(243,212,139,.9);
+			background:rgba(120,198,255,.95);
 			border-radius:2px;
-			box-shadow: 0 0 18px rgba(255,215,0,.25);
+			box-shadow: 0 0 18px rgba(120,198,255,.35);
 		}
 
-		/* أزرار التنقل (01/02/03/04) */
 		.grid{
 			display:grid;
 			grid-template-columns: 1fr 1fr;
@@ -222,10 +292,10 @@
 		}
 		.tile{
 			position:relative;
-			padding:14px 14px 14px;
+			padding:14px;
 			border-radius:18px;
-			border:1px solid rgba(255,215,0,.14);
-			background:rgba(0,0,0,.22);
+			border:1px solid rgba(120,198,255,.18);
+			background:rgba(0,0,0,.20);
 			box-shadow: 0 12px 34px rgba(0,0,0,.35);
 			cursor:pointer;
 			transition: transform .18s ease, border-color .18s ease, background .18s ease;
@@ -234,39 +304,53 @@
 			justify-content:space-between;
 			gap:10px;
 			min-height:64px;
+			overflow:hidden;
+		}
+		.tile::before{
+			content:"";
+			position:absolute; inset:-2px;
+			background: radial-gradient(240px 120px at 20% 20%, rgba(120,198,255,.12), transparent 60%);
+			opacity:.85;
+			pointer-events:none;
 		}
 		.tile:hover{
 			transform: translateY(-1px);
-			border-color: rgba(255,215,0,.28);
-			background:rgba(0,0,0,.30);
+			border-color: rgba(120,198,255,.35);
+			background:rgba(0,0,0,.28);
 		}
 		.tile .label{
-			font-weight:800;
-			color:rgba(233,227,218,.92);
+			font-weight:900;
+			color:rgba(233,242,255,.92);
 			letter-spacing:.2px;
+			position:relative;
+			z-index:1;
 		}
 		.tile .arrow{
-			opacity:.65;
+			opacity:.70;
 			font-size:18px;
+			position:relative;
+			z-index:1;
 		}
 		.tile .num{
 			width:40px; height:40px;
 			border-radius:14px;
 			display:grid; place-items:center;
-			border:1px solid rgba(255,215,0,.18);
-			color:rgba(243,212,139,.95);
-			background: radial-gradient(circle at 30% 30%, rgba(255,215,0,.16), rgba(0,0,0,.10));
+			border:1px solid rgba(120,198,255,.22);
+			color:rgba(120,198,255,.95);
+			background: radial-gradient(circle at 30% 30%, rgba(120,198,255,.16), rgba(0,0,0,.10));
 			font-weight:900;
 			font-family:"El Messiri","Cairo",serif;
+			position:relative;
+			z-index:1;
+			box-shadow: var(--glow);
 		}
 
-		/* بطاقة “بيانات…” مثل الصورة */
 		.bigCard{
 			margin-top:14px;
 			padding:16px;
 			border-radius:22px;
-			border:1px solid rgba(255,215,0,.12);
-			background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+			border:1px solid rgba(120,198,255,.14);
+			background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
 			box-shadow: var(--shadow);
 			position:relative;
 			overflow:hidden;
@@ -275,22 +359,22 @@
 			content:"";
 			position:absolute;
 			inset:-1px;
-			background:
-				radial-gradient(700px 220px at 50% 20%, rgba(255,215,0,.12), transparent 60%);
+			background: radial-gradient(720px 240px at 50% 18%, rgba(120,198,255,.16), transparent 62%);
 			pointer-events:none;
 		}
 		.bigCardInner{
 			position:relative;
 			padding:18px 16px 16px;
 			border-radius:18px;
-			border:1px solid rgba(255,215,0,.10);
-			background: rgba(0,0,0,.26);
+			border:1px solid rgba(120,198,255,.12);
+			background: rgba(0,0,0,.22);
 		}
 		.corner{
 			position:absolute;
 			width:26px;height:26px;
-			border:2px solid rgba(243,212,139,.75);
-			opacity:.65;
+			border:2px solid rgba(120,198,255,.72);
+			opacity:.70;
+			box-shadow: 0 0 18px rgba(120,198,255,.18);
 		}
 		.corner.tl{top:10px;left:10px;border-right:none;border-bottom:none;border-top-left-radius:14px}
 		.corner.tr{top:10px;right:10px;border-left:none;border-bottom:none;border-top-right-radius:14px}
@@ -300,29 +384,33 @@
 		.bigTitle{
 			margin:4px 0 8px;
 			font-family:"El Messiri","Cairo",serif;
-			color:rgba(243,212,139,.95);
+			color:rgba(120,198,255,.98);
 			font-size:22px;
-			font-weight:800;
+			font-weight:900;
+			text-shadow: 0 0 18px rgba(120,198,255,.20);
 		}
 		.bigDesc{
 			margin:0;
-			color:rgba(233,227,218,.70);
+			color:rgba(233,242,255,.72);
 			line-height:1.9;
 			font-size:14px;
 		}
+
 		.spark{
 			margin-top:14px;
-			width:60px;height:60px;
+			width:64px;height:64px;
 			border-radius:18px;
-			border:1px solid rgba(255,215,0,.18);
-			background: radial-gradient(circle at 30% 30%, rgba(255,215,0,.22), rgba(0,0,0,.10));
+			border:1px solid rgba(120,198,255,.22);
+			background: radial-gradient(circle at 30% 30%, rgba(120,198,255,.22), rgba(0,0,0,.10));
 			display:grid; place-items:center;
-			color:rgba(243,212,139,.95);
-			box-shadow: 0 16px 40px rgba(0,0,0,.45);
+			color:rgba(120,198,255,.98);
+			box-shadow: 0 16px 40px rgba(0,0,0,.45), var(--glow);
 			cursor:pointer;
+			transition: transform .15s ease, filter .15s ease;
+			user-select:none;
 		}
+		.spark:hover{ transform: translateY(-1px); filter:saturate(1.08); }
 
-		/* صفحات */
 		section.page{display:none; margin-top:14px}
 		section.page.active{display:block}
 
@@ -340,15 +428,16 @@
 			padding:18px;
 			border-radius:var(--radius);
 			background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-			border:1px solid rgba(255,215,0,.12);
+			border:1px solid rgba(120,198,255,.14);
 			box-shadow: var(--shadow);
 		}
 		.pageHeader .pill{font-size:12.5px}
 		.pageHeader h2{
 			margin:10px 0 6px;
 			font-family:"El Messiri","Cairo",serif;
-			color:var(--gold);
+			color:var(--accent);
 			font-size:34px;
+			text-shadow: 0 0 18px rgba(120,198,255,.18);
 		}
 		.pageHeader p{margin:0;color:var(--muted);line-height:1.9}
 
@@ -356,52 +445,83 @@
 			margin:10px 0 0;
 			padding:0 18px 0 0;
 			line-height:2;
-			color:rgba(233,227,218,.82);
+			color:rgba(233,242,255,.82);
 			font-size:14px;
 		}
 		.list li{margin:2px 0}
 
-		/* كروت الإدارة (قريبة من الصورة الثانية) */
-		.leaderCard{
+		/* ✅ قسم جديد: بوابة الأساطير */
+		.stats{
 			display:grid;
-			grid-template-columns: 86px 1fr;
-			gap:14px;
-			align-items:center;
+			grid-template-columns: 1fr 1fr 1fr;
+			gap:12px;
+			margin-top:12px;
+		}
+		.stat{
+			border:1px solid rgba(120,198,255,.16);
+			background: rgba(0,0,0,.22);
+			border-radius:16px;
+			padding:14px;
+			position:relative;
+			overflow:hidden;
+		}
+		.stat::before{
+			content:"";
+			position:absolute; inset:-2px;
+			background: radial-gradient(220px 120px at 20% 20%, rgba(120,198,255,.12), transparent 60%);
+			opacity:.9;
+			pointer-events:none;
+		}
+		.stat b{
+			display:block;
+			font-family:"El Messiri","Cairo",serif;
+			color: rgba(120,198,255,.98);
+			font-size:18px;
+			position:relative;
+			z-index:1;
+		}
+		.stat small{
+			display:block;
+			margin-top:6px;
+			color: rgba(233,242,255,.72);
+			position:relative;
+			z-index:1;
+		}
+		.progressWrap{
+			margin-top:12px;
+			border:1px solid rgba(120,198,255,.16);
+			background: rgba(0,0,0,.22);
+			border-radius:16px;
 			padding:14px;
 		}
-		.avatar{
-			width:86px;height:86px;
-			border-radius:18px;
-			object-fit:cover;
-			border:2px solid rgba(255,215,0,.26);
-			box-shadow: 0 10px 26px rgba(0,0,0,.5);
-			background:#111;
-		}
-		.rolePill{
-			display:inline-flex;
+		.progressTop{
+			display:flex;
 			align-items:center;
-			gap:8px;
-			padding:6px 12px;
-			border-radius:999px;
-			border:1px solid rgba(255,215,0,.14);
-			background:rgba(0,0,0,.22);
-			color:rgba(243,212,139,.95);
-			font-weight:800;
-			font-size:12px;
-			width:fit-content;
-		}
-		.leaderName{
-			margin:8px 0 6px;
-			color:rgba(243,212,139,.95);
+			justify-content:space-between;
+			gap:10px;
+			color: rgba(233,242,255,.80);
 			font-weight:900;
-			font-size:18px;
-			font-family:"El Messiri","Cairo",serif;
 		}
-		.leaderDesc{
-			margin:0;
-			color:rgba(233,227,218,.72);
-			line-height:1.8;
-			font-size:13px;
+		.bar{
+			margin-top:10px;
+			height:12px;
+			border-radius:999px;
+			background: rgba(255,255,255,.06);
+			overflow:hidden;
+			border: 1px solid rgba(120,198,255,.14);
+		}
+		.bar > span{
+			display:block;
+			height:100%;
+			width:72%;
+			background: linear-gradient(90deg, rgba(120,198,255,.95), rgba(60,125,255,.95), rgba(139,92,246,.85));
+			box-shadow: 0 0 24px rgba(120,198,255,.25);
+			border-radius:999px;
+			animation: barPulse 2.2s ease-in-out infinite;
+		}
+		@keyframes barPulse{
+			0%,100%{ filter:saturate(1); opacity:.92; }
+			50%{ filter:saturate(1.1); opacity:1; }
 		}
 
 		.actions{
@@ -419,40 +539,170 @@
 			cursor:pointer;
 			font-weight:900;
 			font-family:"Cairo", Arial;
-			background: linear-gradient(90deg, var(--gold), var(--gold2));
-			color:#1a1206;
-			box-shadow: 0 16px 40px rgba(0,0,0,.45);
+			background: linear-gradient(90deg, var(--accent), var(--accent2));
+			color:#061024;
+			box-shadow: 0 16px 40px rgba(0,0,0,.45), var(--glow);
 			transition: transform .15s ease, filter .15s ease;
 		}
-		.btn:hover{transform: translateY(-1px); filter:saturate(1.05)}
+		.btn:hover{transform: translateY(-1px); filter:saturate(1.06)}
 		.btn.secondary{
 			background: rgba(0,0,0,.35);
-			color: rgba(243,212,139,.95);
-			border:1px solid rgba(255,215,0,.18);
+			color: rgba(233,242,255,.92);
+			border:1px solid rgba(120,198,255,.20);
 			box-shadow:none;
 		}
 
+		/* Leaders */
+		.leaderCard{
+			display:grid;
+			grid-template-columns: 86px 1fr;
+			gap:14px;
+			align-items:center;
+			padding:14px;
+		}
+		.avatar{
+			width:86px;height:86px;
+			border-radius:18px;
+			object-fit:cover;
+			border:2px solid rgba(120,198,255,.30);
+			box-shadow: 0 10px 26px rgba(0,0,0,.5), var(--glow);
+			background:#0b0f22;
+		}
+		.rolePill{
+			display:inline-flex;
+			align-items:center;
+			gap:8px;
+			padding:6px 12px;
+			border-radius:999px;
+			border:1px solid rgba(120,198,255,.18);
+			background:rgba(0,0,0,.22);
+			color:rgba(120,198,255,.95);
+			font-weight:900;
+			font-size:12px;
+			width:fit-content;
+			box-shadow: var(--glow);
+		}
+		.leaderName{
+			margin:8px 0 6px;
+			color:rgba(120,198,255,.98);
+			font-weight:900;
+			font-size:18px;
+			font-family:"El Messiri","Cairo",serif;
+			text-shadow: 0 0 16px rgba(120,198,255,.20);
+		}
+		.leaderDesc{
+			margin:0;
+			color:rgba(233,242,255,.72);
+			line-height:1.8;
+			font-size:13px;
+		}
+
 		footer{
-			opacity:.55;
+			opacity:.60;
 			text-align:center;
 			padding:20px 0 10px;
 			font-size:12px;
 		}
 
-		/* تحسين للجوال */
+		/* Drawer */
+		.drawerOverlay{
+			position:fixed; inset:0;
+			background: rgba(0,0,0,.55);
+			backdrop-filter: blur(4px);
+			opacity:0;
+			pointer-events:none;
+			transition: opacity .18s ease;
+			z-index:90;
+		}
+		.drawer{
+			position:fixed;
+			top:0; bottom:0;
+			right:0;
+			width:min(320px, 88vw);
+			background: rgba(8, 12, 26, .88);
+			border-left:1px solid rgba(120,198,255,.18);
+			box-shadow: -20px 0 60px rgba(0,0,0,.55);
+			transform: translateX(102%);
+			transition: transform .22s ease;
+			z-index:100;
+			padding:14px;
+		}
+		.drawerHeader{
+			display:flex;
+			align-items:center;
+			justify-content:space-between;
+			gap:10px;
+			padding:6px 4px 10px;
+			border-bottom:1px solid rgba(120,198,255,.14);
+		}
+		.drawerHeader b{ color: var(--accent); font-family:"El Messiri","Cairo",serif; }
+		.closeBtn{
+			width:42px;height:42px;border-radius:14px;
+			border:1px solid rgba(120,198,255,.18);
+			background: rgba(255,255,255,.04);
+			color: rgba(233,242,255,.92);
+			cursor:pointer;
+		}
+		.drawerLinks{
+			padding-top:12px;
+			display:grid;
+			gap:10px;
+		}
+		.drawerLinks button{
+			width:100%;
+			text-align:right;
+			padding:12px 12px;
+			border-radius:14px;
+			border:1px solid rgba(120,198,255,.14);
+			background: rgba(0,0,0,.22);
+			color: rgba(233,242,255,.92);
+			cursor:pointer;
+			font-weight:900;
+		}
+		.drawerLinks button:hover{
+			border-color: rgba(120,198,255,.30);
+			background: rgba(0,0,0,.30);
+		}
+
+		body.drawerOpen .drawerOverlay{ opacity:1; pointer-events:auto; }
+		body.drawerOpen .drawer{ transform: translateX(0); }
+
+		@media (max-width:720px){
+			.stats{ grid-template-columns: 1fr; }
+		}
 		@media (max-width:420px){
 			.heroTitle{font-size:38px}
-			.grid{grid-template-columns:1fr 1fr}
 		}
 	</style>
 </head>
 
 <body>
+	<div class="animeBackdrop"></div>
+	<div class="dim"></div>
 	<div class="bg"></div>
+	<div class="stars"></div>
+
+	<!-- Drawer -->
+	<div class="drawerOverlay" onclick="toggleDrawer(false)"></div>
+	<aside class="drawer" aria-label="القائمة الجانبية">
+		<div class="drawerHeader">
+			<b>مملكة أركانوس</b>
+			<button class="closeBtn" onclick="toggleDrawer(false)" aria-label="إغلاق">✕</button>
+		</div>
+
+		<div class="drawerLinks">
+			<button onclick="go('home'); toggleDrawer(false)">🏠 الرئيسية</button>
+			<button onclick="go('features'); toggleDrawer(false)">✨ المميزات</button>
+			<button onclick="go('terms'); toggleDrawer(false)">📜 شروط الانضمام</button>
+			<button onclick="go('rules'); toggleDrawer(false)">⚖️ القوانين</button>
+			<button onclick="go('leaders'); toggleDrawer(false)">👑 الإدارة العليا</button>
+			<button onclick="go('legends'); toggleDrawer(false)">🌀 بوابة الأساطير</button>
+		</div>
+	</aside>
 
 	<header>
 		<div class="topRow">
-			<button class="menuBtn" onclick="toggleDrawer()" aria-label="القائمة">
+			<button class="menuBtn" onclick="toggleDrawer(true)" aria-label="القائمة">
 				<div class="menuIcon" aria-hidden="true">
 					<span></span><span></span><span></span>
 				</div>
@@ -471,7 +721,7 @@
 	</header>
 
 	<main>
-		<!-- HOME (مثل الصورة الأولى) -->
+		<!-- HOME -->
 		<section id="home" class="page active">
 			<div class="hero">
 				<div class="pill">الواجهة الرسمية للمملكة</div>
@@ -514,6 +764,12 @@
 						<div class="label">الإدارة العليا</div>
 						<div class="num">04</div>
 					</div>
+
+					<div class="tile" onclick="go('legends')">
+						<div class="arrow">‹</div>
+						<div class="label">بوابة الأساطير</div>
+						<div class="num">05</div>
+					</div>
 				</div>
 
 				<div class="bigCard">
@@ -526,7 +782,7 @@
 						<p class="bigDesc">ادخل إلى السجل الذي سيعرض تفاعل النقابات ورسائلها وإحصاءاتها.</p>
 
 						<div style="display:flex; justify-content:center;">
-							<div class="spark" onclick="alert('https://chat.whatsapp.com/ItKpEUc5EJAD6s0ksHBBQZ?mode=hqctcla');" title="الدخول">
+							<div class="spark" onclick="openLink('https://chat.whatsapp.com/ItKpEUc5EJAD6s0ksHBBQZ?mode=hqctcla')" title="الدخول">
 								✦
 							</div>
 						</div>
@@ -541,15 +797,15 @@
 			<div class="pageHeader">
 				<div class="pill">01 — المميزات</div>
 				<h2>المميزات</h2>
-				<p>واجهة ملكية بتصميم احمر داكن، بطاقات أنيقة، وتنقل سريع بين الأقسام.</p>
+				<p>واجهة أنمي خيالية (أزرق نيوني)، بطاقات لامعة، وخلفية GIF متحركة.</p>
 			</div>
 
 			<div class="card">
 				<ul class="list">
-					<li>تصميم قريب من الصور (احمر + خلفية داكنة + بريق).</li>
-					<li>بطاقات مرقّمة (01/02/03/04) مثل واجهة الصفحة الرئيسية.</li>
-					<li>صفحة قيادة/إدارة بكروت أشخاص وزر تواصل واتساب.</li>
-					<li>كود مرتب وسهل تعديل الألوان والنصوص من متغيرات CSS.</li>
+					<li>ثيم أزرق نيوني + Glow ونعومة عالية.</li>
+					<li>خلفية GIF أنمي مع تعتيم لضمان وضوح النص.</li>
+					<li>قائمة جانبية Drawer بدل نافذة Prompt.</li>
+					<li>تجربة نسخ الرقم محسّنة (Toast + زر يتحول).</li>
 				</ul>
 
 				<div class="actions">
@@ -591,7 +847,7 @@
 			</div>
 
 			<div class="card">
-				<div style="color:rgba(243,212,139,.95);font-weight:900;margin-bottom:8px">🪽 ┇ المخالفات والإنذارات ⚠️</div>
+				<div style="color:rgba(120,198,255,.95);font-weight:900;margin-bottom:8px">🪽 ┇ المخالفات والإنذارات ⚠️</div>
 				<ul class="list">
 					<li>إرسال ستكرات كثيرة</li>
 					<li>رسائل مزعجة</li>
@@ -612,7 +868,7 @@
 			<div class="card">
 				<div style="display:grid; gap:10px">
 					<div>
-						<div style="color:rgba(243,212,139,.95);font-weight:900;margin-bottom:6px">🕐 الطرد المؤقت</div>
+						<div style="color:rgba(120,198,255,.95);font-weight:900;margin-bottom:6px">🕐 الطرد المؤقت</div>
 						<ul class="list">
 							<li>إزعاج</li>
 							<li>خاص بدون إذن</li>
@@ -621,7 +877,7 @@
 					</div>
 
 					<div>
-						<div style="color:rgba(243,212,139,.95);font-weight:900;margin-bottom:6px">🚫 الطرد المؤبد</div>
+						<div style="color:rgba(120,198,255,.95);font-weight:900;margin-bottom:6px">🚫 الطرد المؤبد</div>
 						<ul class="list">
 							<li>روابط جروبات</li>
 							<li>+18</li>
@@ -630,7 +886,7 @@
 					</div>
 
 					<div>
-						<div style="color:rgba(243,212,139,.95);font-weight:900;margin-bottom:6px">⚖️ العقوبات</div>
+						<div style="color:rgba(120,198,255,.95);font-weight:900;margin-bottom:6px">⚖️ العقوبات</div>
 						<ul class="list">
 							<li>1 إنذار = تنبيه</li>
 							<li>2 إنذار = طرد مؤقت</li>
@@ -646,7 +902,7 @@
 			</div>
 		</section>
 
-		<!-- LEADERS (قريبة من الصورة الثانية) -->
+		<!-- LEADERS -->
 		<section id="leaders" class="page">
 			<div class="pageHeader">
 				<div class="pill">04 — الهيكل القيادي</div>
@@ -654,33 +910,35 @@
 				<p>الواجهة الرسمية لقيادات المملكة. للتواصل أو الاستفسار.</p>
 			</div>
 
+			<!-- الإمبراطور -->
 			<div class="card leaderCard">
-				<img class="avatar" src="https://i.imgur.com/1X4Q9Xl.jpeg" alt="صورة القائد 1" />
+				<img class="avatar" src="https://i.ibb.co/b5FbXxmW/IMG-20260414-WA0219.jpg" alt="صورة الإمبراطور" />
 				<div>
-					<div class="rolePill">خوف 🪐 </div>
-					<div class="leaderName">الإمبراطور🌑</div>
+					<div class="rolePill">الإمبراطور 🌑</div>
+					<div class="leaderName">خوف 🪐</div>
 					<p class="leaderDesc">
 						المسؤول عن التوجيه العام للمملكة واعتماد القرارات الكبرى ورسم المسار الأعلى للنقابات.
 					</p>
 
 					<div class="actions">
-						<button class="btn secondary" onclick="copyText('0720097123')">📋 نسخ الرقم</button>
+						<button class="btn secondary" onclick="copyText('0720097123', this)">📋 نسخ الرقم</button>
 						<button class="btn" onclick="openWA('212720097123')">التواصل عبر واتساب</button>
 					</div>
 				</div>
 			</div>
 
+			<!-- نائب الإمبراطور -->
 			<div class="card leaderCard">
-				<img class="avatar" src="https://i.imgur.com/9R3Z6QW.jpeg" alt="صورة القائد 2" />
+				<img class="avatar" src="https://i.ibb.co/NbNtTnB/IMG-20260330-WA0084.jpg" alt="صورة نائب الإمبراطور" />
 				<div>
-					<div class="rolePill">🔥 يامي</div>
-					<div class="leaderName">نائب الامبراطور</div>
+					<div class="rolePill">نائب الإمبراطور 🔥</div>
+					<div class="leaderName">يامي</div>
 					<p class="leaderDesc">
 						السلالة الأولى والأعلى في المملكة، وصاحب القرار النهائي في كل خطة وفكرة ونظام.
 					</p>
 
 					<div class="actions">
-						<button class="btn secondary" onclick="copyText('785478016')">📋 نسخ الرقم</button>
+						<button class="btn secondary" onclick="copyText('785478016', this)">📋 نسخ الرقم</button>
 						<button class="btn" onclick="openWA('212785478016')">التواصل عبر واتساب</button>
 					</div>
 				</div>
@@ -688,6 +946,45 @@
 
 			<div class="actions" style="margin-top:12px">
 				<button class="btn secondary" onclick="go('home')">↩ الرجوع للرئيسية</button>
+			</div>
+		</section>
+
+		<!-- ✅ NEW SECTION: LEGENDS -->
+		<section id="legends" class="page">
+			<div class="pageHeader">
+				<div class="pill">05 — بوابة الأساطير</div>
+				<h2>بوابة الأساطير</h2>
+				<p>قسم خيالي يعطي طابع VIP للمملكة: مستويات، نقاط، وطلبات الانضمام.</p>
+			</div>
+
+			<div class="card">
+				<div class="stats">
+					<div class="stat">
+						<b>الرتبة الحالية: نجمي ✦</b>
+						<small>كل تفاعل يرفع مستواك داخل المملكة.</small>
+					</div>
+					<div class="stat">
+						<b>الطاقة: 78%</b>
+						<small>نشاط الأسبوع في ارتفاع.</small>
+					</div>
+					<div class="stat">
+						<b>بوابة VIP: مفتوحة</b>
+						<small>قدّم طلبك وانتظر اعتماد الإدارة.</small>
+					</div>
+				</div>
+
+				<div class="progressWrap">
+					<div class="progressTop">
+						<span>تقدّم نحو رتبة “أسطوري”</span>
+						<span>72%</span>
+					</div>
+					<div class="bar"><span></span></div>
+				</div>
+
+				<div class="actions">
+					<button class="btn" onclick="openWA('212720097123')">✨ اطلب انضمام VIP</button>
+					<button class="btn secondary" onclick="go('home')">↩ الرجوع للرئيسية</button>
+				</div>
 			</div>
 		</section>
 
@@ -708,35 +1005,71 @@
 			window.open("https://wa.me/" + num, "_blank");
 		}
 
-		async function copyText(text){
+		function openLink(url){
+			window.open(url, "_blank");
+		}
+
+		function toggleDrawer(open){
+			document.body.classList.toggle("drawerOpen", !!open);
+		}
+
+		async function copyText(text, btn){
 			try{
 				await navigator.clipboard.writeText(text);
-				alert("تم النسخ 👑");
+				toast("تم النسخ بنجاح ✨");
+				if(btn){
+					const old = btn.textContent;
+					btn.textContent = "✅ تم النسخ";
+					setTimeout(() => btn.textContent = old, 1200);
+				}
 			}catch(e){
-				// fallback
 				const t = document.createElement("textarea");
 				t.value = text;
 				document.body.appendChild(t);
 				t.select();
 				document.execCommand("copy");
 				document.body.removeChild(t);
-				alert("تم النسخ 👑");
+				toast("تم النسخ ✨");
 			}
 		}
 
-		// زر القائمة (هنا مجرد مثال)
-		function toggleDrawer(){
-			// يمكنك لاحقاً عمل Drawer حقيقي
-			const msg =
-`القائمة:
-- الرئيسية
-- المميزات
-- شروط الانضمام
-- القوانين
-- الإدارة العليا`;
-			const choice = prompt(msg + "\n\nاكتب: home / features / terms / rules / leaders");
-			if(choice) go(choice.trim());
+		let toastTimer;
+		function toast(msg){
+			let el = document.getElementById("toast");
+			if(!el){
+				el = document.createElement("div");
+				el.id = "toast";
+				el.style.cssText = `
+					position:fixed; left:14px; bottom:14px;
+					z-index:200;
+					padding:10px 12px;
+					border-radius:14px;
+					border:1px solid rgba(120,198,255,.22);
+					background: rgba(0,0,0,.55);
+					backdrop-filter: blur(8px);
+					color: rgba(233,242,255,.95);
+					box-shadow: 0 18px 55px rgba(0,0,0,.55);
+					opacity:0;
+					transform: translateY(8px);
+					transition: opacity .18s ease, transform .18s ease;
+				`;
+				document.body.appendChild(el);
+			}
+			el.textContent = msg;
+			clearTimeout(toastTimer);
+			requestAnimationFrame(() => {
+				el.style.opacity = "1";
+				el.style.transform = "translateY(0)";
+			});
+			toastTimer = setTimeout(() => {
+				el.style.opacity = "0";
+				el.style.transform = "translateY(8px)";
+			}, 1400);
 		}
+
+		window.addEventListener("keydown", (e) => {
+			if(e.key === "Escape") toggleDrawer(false);
+		});
 	</script>
 </body>
-</html>
+	</html>
