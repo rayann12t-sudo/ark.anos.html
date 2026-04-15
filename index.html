@@ -697,6 +697,10 @@
 			<button onclick="go('rules'); toggleDrawer(false)">⚖️ القوانين</button>
 			<button onclick="go('leaders'); toggleDrawer(false)">👑 الإدارة العليا</button>
 			<button onclick="go('legends'); toggleDrawer(false)">🌀 بوابة الأساطير</button>
+
+			<!-- ✅ جديد -->
+			<button onclick="go('promote'); toggleDrawer(false)">🔰 طريقة الترقية</button>
+			<button onclick="go('admins'); toggleDrawer(false)">🔒 دخول المشرفين</button>
 		</div>
 	</aside>
 
@@ -729,9 +733,9 @@
 				<h1 class="heroTitle">مملكة أركانوس</h1>
 
 				<p class="heroDesc">
-					المملكة الأعظم والمستقطب الأسمى للنقابات عبر التاريخ، حيث تجمع بين
-					التميّز والتحدّي والمنافسة بين الجماعات والأفراد عبر مميزاتها الفريدة
-					وأحداثها المنفردة والمتعددة.
+					المملكة الأعظم والمستقطب الأسمى للنقابات عبر التاريخ، حيث تجمع بين<br>
+					التميّز والتحدّي والمنافسة بين الجماعات والأفراد عبر مميزاتها الفريدة<br>
+					وأحداثها المنفردة والمتعددة.<br>
 				</p>
 
 				<div class="dividerRow">
@@ -769,6 +773,20 @@
 						<div class="arrow">‹</div>
 						<div class="label">بوابة الأساطير</div>
 						<div class="num">05</div>
+					</div>
+
+					<!-- ✅ جديد -->
+					<div class="tile" onclick="go('promote')">
+						<div class="arrow">‹</div>
+						<div class="label">طريقة الترقية</div>
+						<div class="num">06</div>
+					</div>
+
+					<!-- ✅ جديد -->
+					<div class="tile" onclick="go('admins')">
+						<div class="arrow">‹</div>
+						<div class="label">دخول المشرفين</div>
+						<div class="num">07</div>
 					</div>
 				</div>
 
@@ -917,7 +935,7 @@
 					<div class="rolePill">الإمبراطور 🌑</div>
 					<div class="leaderName">خوف 🪐</div>
 					<p class="leaderDesc">
-						المسؤول عن التوجيه العام للمملكة واعتماد القرارات الكبرى ورسم المسار الأعلى للنقابات.
+						المسؤول عن التوجيه العام للمملكة واعتماد القرارات الكبرى ورسم المسار الأعلى للنقابات.<br>
 					</p>
 
 					<div class="actions">
@@ -934,12 +952,45 @@
 					<div class="rolePill">نائب الإمبراطور 🔥</div>
 					<div class="leaderName">يامي</div>
 					<p class="leaderDesc">
-						السلالة الأولى والأعلى في المملكة، وصاحب القرار النهائي في كل خطة وفكرة ونظام.
+						السلالة الأولى والأعلى في المملكة، وصاحب القرار النهائي في كل خطة وفكرة ونظام.<br>
 					</p>
 
 					<div class="actions">
 						<button class="btn secondary" onclick="copyText('785478016', this)">📋 نسخ الرقم</button>
 						<button class="btn" onclick="openWA('212785478016')">التواصل عبر واتساب</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- ✅ نائب ثاني للإمبراطور -->
+			<div class="card leaderCard">
+				<img class="avatar" src="https://i.ibb.co/FbMkDLHT/IMG-20260410-WA0269.jpg" alt="صورة نائب ثاني للإمبراطور" />
+				<div>
+					<div class="rolePill">نائب ثاني للإمبراطور ⚡</div>
+					<div class="leaderName">نائب الإمبراطور الثاني</div>
+					<p class="leaderDesc">
+						جزء من الرتب العليا، مسؤول عن دعم قرارات الإدارة ومتابعة شؤون المملكة.
+					</p>
+
+					<div class="actions">
+						<button class="btn secondary" onclick="copyText('01005580454', this)">📋 نسخ الرقم</button>
+						<button class="btn" onclick="openWA('201005580454')">التواصل عبر واتساب</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- ✅ اللورد -->
+			<div class="card leaderCard">
+				<img class="avatar" src="https://i.ibb.co/BKC7R4md/IMG-20260410-WA0015.jpg" alt="صورة اللورد" />
+				<div>
+					<div class="rolePill">اللورد 🏰</div>
+					<div class="leaderName">اللورد</div>
+					<p class="leaderDesc">
+						من رتب المملكة العليا، مسؤول عن النظام والهيبة داخل المملكة.
+					</p>
+
+					<div class="actions">
+						<button class="btn secondary" onclick="copyText('0721063320', this)">📋 نسخ الرقم</button>
 					</div>
 				</div>
 			</div>
@@ -988,6 +1039,78 @@
 			</div>
 		</section>
 
+		<!-- ✅ SECTION 06: PROMOTE -->
+		<section id="promote" class="page">
+			<div class="pageHeader">
+				<div class="pill">06 — طريقة الترقية</div>
+				<h2>طريقة الترقية</h2>
+				<p>🔰┆ما هي طرق ترقية وكيف تعمل┆🔰</p>
+			</div>
+
+			<div class="card">
+				<div style="text-align:center; opacity:.75; letter-spacing:1px;">
+					⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞
+				</div>
+
+				<div style="color:rgba(120,198,255,.95); font-weight:900; margin:10px 0 8px;">
+					كيفية الترقية
+				</div>
+
+				<ul class="list">
+					<li>◅ طريقة ترقية هي نشر في مواقع تواصل اجتماعي عن مملكتنا ▻</li>
+					<li>◅ تفاعل مستمر ▻</li>
+					<li>◅ تسجيل كل اعضاء نقابة ▻</li>
+					<li>◅ استقبال اعضاء ▻</li>
+				</ul>
+
+				<div style="text-align:center; opacity:.75; letter-spacing:1px; margin-top:10px;">
+					⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞
+				</div>
+
+				<ul class="list">
+					<li>┆ يمنع تكاسل إدا كان هناك مبرر فتواصل معا إدارة ⚡</li>
+					<li>┆ يمنع تعالي أو تفاخر برتبتك و استهزاء بي العضو</li>
+					<li>┆ ان تم رصد أي تفاعل غير محترم اعفاء</li>
+				</ul>
+
+				<div style="text-align:center; opacity:.75; letter-spacing:1px; margin-top:10px;">
+					⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞⏤͟͟͞͞
+				</div>
+
+				<p style="margin:10px 0 0; color:rgba(233,242,255,.80); line-height:1.9;">
+					نحن هنا لي استقبال أي اسالة أو عدر
+				</p>
+
+				<div class="actions">
+					<button class="btn secondary" onclick="go('home')">↩ الرجوع للرئيسية</button>
+					<button class="btn" onclick="go('admins')">🔒 دخول المشرفين</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- ✅ SECTION 07: ADMINS (Password Gate) -->
+		<section id="admins" class="page">
+			<div class="pageHeader">
+				<div class="pill">07 — دخول المشرفين</div>
+				<h2>دخول المشرفين</h2>
+				<p>قسم خاص بالمشرفين فقط</p>
+			</div>
+
+			<div class="card">
+				<div class="actions" style="margin-top:0;">
+					<button class="btn" onclick="openAdminSection()">🔒 دخول المشرفين</button>
+					<button class="btn secondary" onclick="go('home')">↩ الرجوع للرئيسية</button>
+				</div>
+
+				<div id="adminContent" style="display:none; margin-top:12px;">
+					<div style="color:rgba(120,198,255,.95); font-weight:900; margin-bottom:8px;">🔒 محتوى المشرفين</div>
+					<ul class="list">
+						<li>ضع هنا أي معلومات/أوامر خاصة بالمشرفين فقط.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
 		<footer>
 			خوف — جميع الحقوق محفوظة (المطور) • 2026
 		</footer>
@@ -1011,6 +1134,18 @@
 
 		function toggleDrawer(open){
 			document.body.classList.toggle("drawerOpen", !!open);
+		}
+
+		// ✅ دخول المشرفين بكلمة مرور
+		function openAdminSection(){
+			const pass = prompt("أدخل كلمة مرور المشرفين:");
+			if(pass === "اركانوس123"){
+				const box = document.getElementById("adminContent");
+				if(box) box.style.display = "block";
+				toast("تم فتح قسم المشرفين ✅");
+			}else{
+				toast("كلمة المرور غير صحيحة ❌");
+			}
 		}
 
 		async function copyText(text, btn){
@@ -1072,4 +1207,4 @@
 		});
 	</script>
 </body>
-	</html>
+</html>
