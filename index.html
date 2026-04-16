@@ -379,8 +379,6 @@
 			font-size:12px;
 			width: fit-content;
 		}
-
-		.small{font-size:13px; opacity:.78; line-height:1.9}
 	</style>
 </head>
 
@@ -420,8 +418,6 @@
 			<button onclick="go('home'); toggleDrawer(false)">🏠 الرئيسية</button>
 			<button onclick="go('register'); toggleDrawer(false)">📝 تسجيل الأعضاء</button>
 			<button onclick="go('member'); toggleDrawer(false)">🎯 مهام العضو</button>
-			<button onclick="go('achievements'); toggleDrawer(false)">🏆 إنجازات الأعضاء</button>
-			<button onclick="go('edits'); toggleDrawer(false)">🎬 قسم الإيديت</button>
 			<button onclick="go('emperor'); toggleDrawer(false)">🌑 قسم الإمبراطور</button>
 		</div>
 	</aside>
@@ -456,18 +452,10 @@
 
 				<p class="heroDesc">
 					- تسجيل عضو (صورة أنمي + لقب)\
-\
 
 					- العضو يرسل “طلب إنجاز مهام” للإمبراطور للمراجعة\
-\
 
 					- الإمبراطور يوافق/يرفض ويُضاف XP تلقائيًا\
-\
-
-					- قسم “إنجازات الأعضاء” (كل شخص يشاهد إنجازاته فقط عبر البحث باللقب)\
-\
-
-					- قسم “الإيديت” (رفع إيديت ≤ دقيقة + اسم الشخصية + تنزيل الإيديت)\
 \
 
 					للاستفسار أو طلب مهام أو ترقية أسرع: <b>0720097123</b>
@@ -492,28 +480,16 @@
 						<div class="num">02</div>
 					</div>
 
-					<div class="tile" onclick="go('achievements')">
-						<div class="arrow">‹</div>
-						<div class="label">🏆 إنجازات الأعضاء</div>
-						<div class="num">03</div>
-					</div>
-
-					<div class="tile" onclick="go('edits')">
-						<div class="arrow">‹</div>
-						<div class="label">🎬 قسم الإيديت</div>
-						<div class="num">04</div>
-					</div>
-
 					<div class="tile" onclick="go('emperor')">
 						<div class="arrow">‹</div>
 						<div class="label">🌑 قسم الإمبراطور</div>
-						<div class="num">05</div>
+						<div class="num">03</div>
 					</div>
 
 					<div class="tile" onclick="openWA('212720097123')">
 						<div class="arrow">‹</div>
 						<div class="label">📞 تواصل</div>
-						<div class="num">06</div>
+						<div class="num">04</div>
 					</div>
 				</div>
 			</div>
@@ -545,7 +521,6 @@
 
 				<div style="margin-top:12px; opacity:.75; line-height:1.9; font-size:13px;">
 					بعد التسجيل سيتم نقلك تلقائيًا إلى “مهام العضو”.\
-\
 
 					للاستفسار أو طلب مهام/ترقية أسرع: <b>0720097123</b>
 				</div>
@@ -601,113 +576,10 @@
 			</div>
 		</section>
 
-		<!-- ACHIEVEMENTS -->
-		<section id="achievements" class="page">
-			<div class="pageHeader">
-				<div class="pill">03 — إنجازات الأعضاء</div>
-				<h2>سجل إنجازات العضو</h2>
-				<p>اكتب لقبك (يجب أن تكون مسجلًا) لعرض إنجازاتك فقط. المشرفون يمكنهم التعديل بكلمة مرور <b>123321</b>.</p>
-			</div>
-
-			<div class="card">
-				<div style="font-weight:900; color:rgba(120,198,255,.95); margin-bottom:10px;">🔎 البحث باللقب</div>
-
-				<div class="inputRow">
-					<input id="achSearchName" class="input" type="text" placeholder="اكتب لقبك المسجل هنا" />
-					<button class="btn" style="min-width:160px;" onclick="searchAchievements()">عرض إنجازاتي</button>
-					<button class="btn secondary" style="min-width:160px;" onclick="openAchievementsAdmin()">🔧 تعديل (مشرف)</button>
-				</div>
-
-				<div id="achSearchMsg" class="small" style="margin-top:10px; min-height:18px;"></div>
-
-				<div style="border-top:1px solid rgba(120,198,255,.12); margin:12px 0;"></div>
-
-				<div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;">
-					<div style="font-weight:900; color:rgba(120,198,255,.95);">🏆 إنجازاتي</div>
-					<div class="badge" id="achCountBadge">0 إنجاز</div>
-				</div>
-
-				<div id="achievementsBox" style="display:grid; gap:10px; margin-top:10px;"></div>
-
-				<div class="actions">
-					<button class="btn secondary" onclick="go('home')">↩ الرجوع</button>
-				</div>
-			</div>
-
-			<!-- Admin panel (hidden) -->
-			<div class="card" id="achAdminPanel" style="display:none;">
-				<div style="font-weight:900; color:rgba(120,198,255,.95); margin-bottom:10px;">🔧 لوحة تعديل الإنجازات (مشرف)</div>
-				<div class="small">ابحث عن عضو باللقب، ثم أضف/احذف/عدّل إنجازاته.</div>
-
-				<div style="margin-top:10px; display:grid; gap:10px;">
-					<input id="achAdminMemberName" class="input" type="text" placeholder="لقب العضو المستهدف" />
-					<div class="inputRow">
-						<input id="achAdminTitle" class="input" type="text" placeholder="عنوان الإنجاز (مثال: شاركت في فعالية...)" />
-						<input id="achAdminNote" class="input" type="text" placeholder="ملاحظة (اختياري)" />
-					</div>
-					<div class="actions" style="margin-top:0;">
-						<button class="btn" onclick="adminAddAchievement()">➕ إضافة إنجاز</button>
-						<button class="btn secondary" onclick="adminLoadMemberAchievements()">📋 تحميل إنجازات العضو</button>
-						<button class="btn secondary" onclick="closeAchievementsAdmin()">إغلاق اللوحة</button>
-					</div>
-				</div>
-
-				<div id="achAdminMsg" class="small" style="margin-top:10px; min-height:18px;"></div>
-
-				<div style="border-top:1px solid rgba(120,198,255,.12); margin:12px 0;"></div>
-				<div style="font-weight:900; color:rgba(120,198,255,.95); margin-bottom:8px;">🧾 إنجازات العضو (للتعديل/الحذف)</div>
-				<div id="achAdminList" style="display:grid; gap:10px;"></div>
-			</div>
-		</section>
-
-		<!-- EDITS -->
-		<section id="edits" class="page">
-			<div class="pageHeader">
-				<div class="pill">04 — قسم الإيديت</div>
-				<h2>نشر إيديت أنمي</h2>
-				<p>أي عضو مسجل يمكنه نشر إيديت (≤ دقيقة) مع كتابة اسم الشخصية. ويمكن تنزيل أي إيديت منشور.</p>
-			</div>
-
-			<div class="card">
-				<div style="font-weight:900; color:rgba(120,198,255,.95); margin-bottom:10px;">➕ إضافة إيديت جديد</div>
-
-				<div class="small">
-					ملاحظة: أفضل طريقة هي رفع الفيديو على استضافة (Drive/Streamable/…)
-					ووضع رابط مباشر للفيديو (MP4).
-				</div>
-
-				<div style="margin-top:10px; display:grid; gap:10px;">
-					<input id="editCharacter" class="input" type="text" placeholder="اسم الشخصية التي في الإيديت (إجباري)" />
-					<input id="editTitle" class="input" type="text" placeholder="عنوان الإيديت (اختياري)" />
-					<input id="editVideoUrl" class="input" type="url" placeholder="رابط الفيديو (MP4 أو رابط مباشر)" />
-					<div class="inputRow">
-						<input id="editDuration" class="input" type="number" min="1" max="60" placeholder="المدة بالثواني (1 إلى 60) — إجباري" />
-						<button class="btn" style="min-width:160px;" onclick="publishEdit()">📤 نشر الإيديت</button>
-						<button class="btn secondary" style="min-width:160px;" onclick="go('home')">↩ الرجوع</button>
-					</div>
-					<div id="editMsg" class="small" style="min-height:18px;"></div>
-				</div>
-			</div>
-
-			<div class="card">
-				<div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;">
-					<div style="font-weight:900; color:rgba(120,198,255,.95);">🎬 الإيديتات المنشورة</div>
-					<div class="badge" id="editsCountBadge">0 منشور</div>
-				</div>
-
-				<div class="inputRow" style="margin-top:10px;">
-					<input id="editsSearch" class="input" type="text" placeholder="بحث: اسم شخصية / لقب ناشر" />
-					<button class="btn secondary" style="min-width:160px;" onclick="renderEdits()">تحديث</button>
-				</div>
-
-				<div id="editsList" style="display:grid; gap:10px; margin-top:10px;"></div>
-			</div>
-		</section>
-
 		<!-- EMPEROR -->
 		<section id="emperor" class="page">
 			<div class="pageHeader">
-				<div class="pill">05 — قسم الإمبراطور</div>
+				<div class="pill">03 — قسم الإمبراطور</div>
 				<h2>لوحة الإمبراطور</h2>
 				<p>قسم خاص بكلمة مرور: <b>rayan</b> — جميع الأعضاء + طلبات المهام + نظام XP</p>
 			</div>
@@ -723,10 +595,8 @@
 
 					<div style="opacity:.75; font-size:13px; line-height:1.8; margin-bottom:10px;">
 						- الموافقة على “300 رسالة” = <b>+50 XP</b>\
-\
 
 						- الموافقة على “إضافة 5 أعضاء” = <b>+50 XP</b>\
-\
 
 						- للاستفسار أو طلب مهام/ترقية أسرع: <b>0720097123</b>
 					</div>
@@ -790,13 +660,6 @@
 				renderCurrentMember();
 				renderMyRequests();
 			}
-			if(id === "achievements"){
-				renderAchievementsEmpty();
-				closeAchievementsAdmin();
-			}
-			if(id === "edits"){
-				renderEdits();
-			}
 		}
 		function openWA(num){ window.open("https://wa.me/" + num, "_blank"); }
 		function toggleDrawer(open){ document.body.classList.toggle("drawerOpen", !!open); }
@@ -808,11 +671,7 @@
 		const CURRENT_KEY = "arkanous_current_member_id";
 		const REQUESTS_KEY = "arkanous_task_requests_v1";
 
-		// Achievements + Edits (NEW)
-		const ACH_KEY = "arkanous_achievements_v1"; // { [memberId]: [ {id,title,note,createdAt,createdBy} ] }
-		const EDITS_KEY = "arkanous_edits_v1";      // [ {id, memberId, memberName, character, title, videoUrl, durationSec, createdAt} ]
-
-		// XP rewards
+		// مكافآت XP للمهام (بعد الموافقة)
 		const TASKS = {
 			messages_300: { label: "إرسال 300 رسالة", xp: 50 },
 			invite_5: { label: "إضافة 5 أعضاء", xp: 50 },
@@ -839,22 +698,6 @@
 			return Array.isArray(list) ? list : [];
 		}
 		function saveRequests(list){ localStorage.setItem(REQUESTS_KEY, encode(list)); }
-
-		function loadAchievementsMap(){
-			const raw = localStorage.getItem(ACH_KEY);
-			if(!raw) return {};
-			const obj = decode(raw);
-			return (obj && typeof obj === "object") ? obj : {};
-		}
-		function saveAchievementsMap(map){ localStorage.setItem(ACH_KEY, encode(map)); }
-
-		function loadEdits(){
-			const raw = localStorage.getItem(EDITS_KEY);
-			if(!raw) return [];
-			const list = decode(raw);
-			return Array.isArray(list) ? list : [];
-		}
-		function saveEdits(list){ localStorage.setItem(EDITS_KEY, encode(list)); }
 
 		function computeRank(xp){
 			if(xp >= 100) return "مُرقّى 👑";
@@ -931,25 +774,10 @@
 			saveMembers(list);
 			setCurrentMemberId(member.id);
 
-			// Ensure achievements bucket exists
-			const achMap = loadAchievementsMap();
-			if(!achMap[member.id]) achMap[member.id] = [];
-			saveAchievementsMap(achMap);
-
 			if(msgEl) msgEl.textContent = "✅ تم التسجيل بنجاح! سيتم نقلك لمهام العضو.";
 			toast("تم التسجيل ✅");
 
 			setTimeout(() => go("member"), 450);
-		}
-
-		function getMemberById(id){
-			return loadMembers().find(m => m.id === id);
-		}
-		function findMemberByName(name){
-			const list = loadMembers();
-			const n = String(name || "").trim().toLowerCase();
-			if(!n) return null;
-			return list.find(m => (m.name || "").trim().toLowerCase() === n) || null;
 		}
 
 		function renderCurrentMember(){
@@ -964,7 +792,6 @@
 				wrap.innerHTML = `
 					<div style="opacity:.8; line-height:1.9;">
 						لم تقم بتسجيل عضو بعد.\
-\
 
 						اذهب إلى قسم “تسجيل الأعضاء” لإنشاء حسابك.
 					</div>
@@ -994,6 +821,7 @@
 
 		/* ======================
 		   Member -> Submit Requests
+		   - يمنع تكرار نفس المهمة في نفس اليوم إذا كانت Pending/Approved
 		====================== */
 		function todayKey(){
 			const d = new Date();
@@ -1037,7 +865,7 @@
 				taskLabel: TASKS[taskId].label,
 				xp: TASKS[taskId].xp,
 				dayKey: tKey,
-				status: "pending",
+				status: "pending", // pending | approved | rejected
 				createdAt: new Date().toISOString(),
 				decidedAt: null,
 				decidedBy: "emperor"
@@ -1082,7 +910,6 @@
 					</div>
 					<div style="margin-top:8px; opacity:.75; font-size:13px; line-height:1.8;">
 						اليوم: <b>${escapeHtml(r.dayKey)}</b>\
-\
 
 						وقت الإرسال: ${escapeHtml(formatTime(r.createdAt))}
 						${r.decidedAt ? `\
@@ -1093,381 +920,10 @@
 		}
 
 		/* ======================
-		   Achievements (NEW)
-		   - user can only view via searching their own nickname (must be registered)
-		   - admin can modify after password 123321
-		====================== */
-		const ACH_ADMIN_PASSWORD = "123321";
-
-		function renderAchievementsEmpty(){
-			const box = document.getElementById("achievementsBox");
-			const badge = document.getElementById("achCountBadge");
-			const msg = document.getElementById("achSearchMsg");
-			if(box) box.innerHTML = `<div style="opacity:.75;">ابحث باللقب لعرض إنجازاتك.</div>`;
-			if(badge) badge.textContent = `0 إنجاز`;
-			if(msg) msg.textContent = "";
-		}
-
-		function searchAchievements(){
-			const name = (document.getElementById("achSearchName")?.value || "").trim();
-			const msg = document.getElementById("achSearchMsg");
-
-			if(!name){
-				if(msg) msg.textContent = "❌ اكتب لقبك.";
-				toast("اكتب لقبك");
-				return;
-			}
-
-			const m = findMemberByName(name);
-			if(!m){
-				if(msg) msg.textContent = "❌ هذا اللقب غير مسجل. يجب التسجيل أولاً.";
-				toast("غير مسجل");
-				return;
-			}
-
-			// شرط: الشخص يشوف غير إنجازاته => لازم يكون نفس العضو الحالي
-			const currentId = getCurrentMemberId();
-			if(!currentId){
-				if(msg) msg.textContent = "❌ يجب تسجيل الدخول كعضو (سجّل/اختر عضو) ثم جرّب.";
-				toast("سجّل عضو");
-				go("register");
-				return;
-			}
-			if(currentId !== m.id){
-				if(msg) msg.textContent = "❌ لا يمكنك مشاهدة إنجازات غيرك. ابحث بلقبك أنت فقط.";
-				toast("ممنوع");
-				return;
-			}
-
-			if(msg) msg.textContent = `✅ تم عرض إنجازات: ${m.name}`;
-			renderAchievementsForMember(m.id);
-		}
-
-		function renderAchievementsForMember(memberId){
-			const achMap = loadAchievementsMap();
-			const list = Array.isArray(achMap[memberId]) ? achMap[memberId] : [];
-			const box = document.getElementById("achievementsBox");
-			const badge = document.getElementById("achCountBadge");
-			if(badge) badge.textContent = `${list.length} إنجاز`;
-
-			if(!box) return;
-			if(list.length === 0){
-				box.innerHTML = `<div style="opacity:.75;">لا توجد إنجازات مسجلة بعد.</div>`;
-				return;
-			}
-
-			box.innerHTML = list
-				.slice()
-				.sort((a,b) => String(b.createdAt||"").localeCompare(String(a.createdAt||"")))
-				.map(a => `
-					<div class="card" style="background: rgba(0,0,0,.18);">
-						<div style="font-weight:900; color:rgba(233,242,255,.92);">
-							🏆 ${escapeHtml(a.title || "إنجاز")}
-						</div>
-						${a.note ? `<div class="small" style="margin-top:6px;">${escapeHtml(a.note)}</div>` : ``}
-						<div class="small" style="margin-top:8px;">
-							التاريخ: <b>${escapeHtml(formatTime(a.createdAt))}</b>
-						</div>
-					</div>
-				`).join("");
-		}
-
-		function openAchievementsAdmin(){
-			// open password modal in admin mode
-			modalMode = "ach_admin";
-			document.body.classList.add("modalOpen");
-			document.getElementById("modalTitle").textContent = "🔧 تعديل الإنجازات";
-			document.getElementById("modalHint").textContent = "أدخل كلمة المرور (123321) لفتح لوحة تعديل الإنجازات.";
-			document.getElementById("modalMsg").textContent = "";
-			const input = document.getElementById("modalPass");
-			if(input){
-				input.value = "";
-				setTimeout(() => input.focus(), 80);
-			}
-		}
-
-		function closeAchievementsAdmin(){
-			const panel = document.getElementById("achAdminPanel");
-			if(panel) panel.style.display = "none";
-			const msg = document.getElementById("achAdminMsg");
-			if(msg) msg.textContent = "";
-			const list = document.getElementById("achAdminList");
-			if(list) list.innerHTML = "";
-		}
-
-		function adminLoadMemberAchievements(){
-			const name = (document.getElementById("achAdminMemberName")?.value || "").trim();
-			const msg = document.getElementById("achAdminMsg");
-			if(!name){
-				if(msg) msg.textContent = "❌ اكتب لقب العضو.";
-				toast("اكتب اللقب");
-				return;
-			}
-			const m = findMemberByName(name);
-			if(!m){
-				if(msg) msg.textContent = "❌ عضو غير موجود.";
-				toast("غير موجود");
-				return;
-			}
-			if(msg) msg.textContent = `✅ تم تحميل إنجازات: ${m.name}`;
-			renderAdminAchievementsList(m.id);
-		}
-
-		function renderAdminAchievementsList(memberId){
-			const wrap = document.getElementById("achAdminList");
-			if(!wrap) return;
-
-			const achMap = loadAchievementsMap();
-			const list = Array.isArray(achMap[memberId]) ? achMap[memberId] : [];
-
-			if(list.length === 0){
-				wrap.innerHTML = `<div style="opacity:.75;">لا توجد إنجازات لهذا العضو.</div>`;
-				return;
-			}
-
-			wrap.innerHTML = list
-				.slice()
-				.sort((a,b) => String(b.createdAt||"").localeCompare(String(a.createdAt||"")))
-				.map(a => `
-					<div class="card" style="background: rgba(0,0,0,.18);">
-						<div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center;">
-							<div style="font-weight:900; color:rgba(233,242,255,.92);">
-								🏆 ${escapeHtml(a.title || "إنجاز")}
-							</div>
-							<div style="display:flex; gap:8px; flex-wrap:wrap;">
-								<button class="btn secondary" style="min-width:auto; padding:10px 12px;" onclick="adminEditAchievementPrompt('${escapeHtml(memberId)}','${escapeHtml(a.id)}')">✏️ تعديل</button>
-								<button class="btn secondary" style="min-width:auto; padding:10px 12px;" onclick="adminDeleteAchievement('${escapeHtml(memberId)}','${escapeHtml(a.id)}')">🗑️ حذف</button>
-							</div>
-						</div>
-						${a.note ? `<div class="small" style="margin-top:6px;">${escapeHtml(a.note)}</div>` : ``}
-						<div class="small" style="margin-top:8px;">${escapeHtml(formatTime(a.createdAt))}</div>
-					</div>
-				`).join("");
-		}
-
-		function adminAddAchievement(){
-			const name = (document.getElementById("achAdminMemberName")?.value || "").trim();
-			const title = (document.getElementById("achAdminTitle")?.value || "").trim();
-			const note = (document.getElementById("achAdminNote")?.value || "").trim();
-			const msg = document.getElementById("achAdminMsg");
-
-			if(!name){
-				if(msg) msg.textContent = "❌ اكتب لقب العضو المستهدف.";
-				toast("اكتب لقب العضو");
-				return;
-			}
-			const m = findMemberByName(name);
-			if(!m){
-				if(msg) msg.textContent = "❌ عضو غير موجود.";
-				toast("غير موجود");
-				return;
-			}
-			if(!title){
-				if(msg) msg.textContent = "❌ اكتب عنوان الإنجاز.";
-				toast("اكتب الإنجاز");
-				return;
-			}
-
-			const achMap = loadAchievementsMap();
-			if(!Array.isArray(achMap[m.id])) achMap[m.id] = [];
-			achMap[m.id].unshift({
-				id: cryptoRandomId(),
-				title,
-				note: note || "",
-				createdAt: new Date().toISOString(),
-				createdBy: "admin"
-			});
-			saveAchievementsMap(achMap);
-
-			if(msg) msg.textContent = "✅ تمت إضافة الإنجاز.";
-			toast("تمت الإضافة ✅");
-
-			document.getElementById("achAdminTitle").value = "";
-			document.getElementById("achAdminNote").value = "";
-
-			renderAdminAchievementsList(m.id);
-
-			// If current user is same member, refresh their view too
-			if(getCurrentMemberId() === m.id){
-				renderAchievementsForMember(m.id);
-			}
-		}
-
-		function adminDeleteAchievement(memberId, achId){
-			const ok = confirm("تأكيد حذف الإنجاز؟");
-			if(!ok) return;
-
-			const achMap = loadAchievementsMap();
-			const list = Array.isArray(achMap[memberId]) ? achMap[memberId] : [];
-			achMap[memberId] = list.filter(a => a.id !== achId);
-			saveAchievementsMap(achMap);
-
-			toast("تم الحذف 🗑️");
-			renderAdminAchievementsList(memberId);
-
-			if(getCurrentMemberId() === memberId){
-				renderAchievementsForMember(memberId);
-			}
-		}
-
-		function adminEditAchievementPrompt(memberId, achId){
-			const achMap = loadAchievementsMap();
-			const list = Array.isArray(achMap[memberId]) ? achMap[memberId] : [];
-			const a = list.find(x => x.id === achId);
-			if(!a){ toast("غير موجود"); return; }
-
-			const newTitle = prompt("تعديل عنوان الإنجاز:", a.title || "");
-			if(newTitle === null) return;
-
-			const newNote = prompt("تعديل الملاحظة (اختياري):", a.note || "");
-			if(newNote === null) return;
-
-			a.title = String(newTitle).trim() || a.title;
-			a.note = String(newNote).trim();
-
-			saveAchievementsMap(achMap);
-			toast("تم التعديل ✏️");
-			renderAdminAchievementsList(memberId);
-
-			if(getCurrentMemberId() === memberId){
-				renderAchievementsForMember(memberId);
-			}
-		}
-
-		/* ======================
-		   Edits (NEW)
-		====================== */
-		function publishEdit(){
-			const currentId = getCurrentMemberId();
-			if(!currentId){
-				toast("سجّل عضو أولاً");
-				go("register");
-				return;
-			}
-
-			const m = getMemberById(currentId);
-			if(!m){
-				toast("عضو غير موجود");
-				go("register");
-				return;
-			}
-
-			const character = (document.getElementById("editCharacter")?.value || "").trim();
-			const title = (document.getElementById("editTitle")?.value || "").trim();
-			const videoUrl = (document.getElementById("editVideoUrl")?.value || "").trim();
-			const durationRaw = (document.getElementById("editDuration")?.value || "").trim();
-			const msg = document.getElementById("editMsg");
-
-			const durationSec = Number(durationRaw);
-
-			if(!character){
-				if(msg) msg.textContent = "❌ اكتب اسم الشخصية.";
-				toast("اسم الشخصية");
-				return;
-			}
-			if(!videoUrl){
-				if(msg) msg.textContent = "❌ ضع رابط الفيديو.";
-				toast("رابط الفيديو");
-				return;
-			}
-			if(!Number.isFinite(durationSec) || durationSec < 1 || durationSec > 60){
-				if(msg) msg.textContent = "❌ المدة يجب أن تكون بين 1 و 60 ثانية.";
-				toast("المدة ≤ 60");
-				return;
-			}
-
-			const edits = loadEdits();
-			edits.unshift({
-				id: cryptoRandomId(),
-				memberId: m.id,
-				memberName: m.name,
-				character,
-				title: title || "",
-				videoUrl,
-				durationSec: Math.round(durationSec),
-				createdAt: new Date().toISOString()
-			});
-			saveEdits(edits);
-
-			if(msg) msg.textContent = "✅ تم نشر الإيديت.";
-			toast("تم النشر ✅");
-
-			document.getElementById("editCharacter").value = "";
-			document.getElementById("editTitle").value = "";
-			document.getElementById("editVideoUrl").value = "";
-			document.getElementById("editDuration").value = "";
-
-			renderEdits();
-		}
-
-		function renderEdits(){
-			const listWrap = document.getElementById("editsList");
-			const badge = document.getElementById("editsCountBadge");
-			if(!listWrap) return;
-
-			const q = (document.getElementById("editsSearch")?.value || "").trim().toLowerCase();
-			let edits = loadEdits();
-
-			if(q){
-				edits = edits.filter(e =>
-					String(e.character||"").toLowerCase().includes(q) ||
-					String(e.memberName||"").toLowerCase().includes(q) ||
-					String(e.title||"").toLowerCase().includes(q)
-				);
-			}
-
-			if(badge) badge.textContent = `${edits.length} منشور`;
-
-			if(edits.length === 0){
-				listWrap.innerHTML = `<div style="opacity:.75;">لا توجد إيديتات منشورة بعد.</div>`;
-				return;
-			}
-
-			listWrap.innerHTML = edits.slice(0, 40).map(e => {
-				const safeUrl = escapeHtml(e.videoUrl || "");
-				const safeChar = escapeHtml(e.character || "");
-				const safeTitle = escapeHtml(e.title || "");
-				const safeMember = escapeHtml(e.memberName || "");
-				const dur = Number(e.durationSec)||0;
-
-				return `
-					<div class="card" style="background: rgba(0,0,0,.18);">
-						<div style="font-weight:900; color:rgba(233,242,255,.92);">
-							🎬 ${safeTitle ? safeTitle : "إيديت"}​NOTION_TWS[ ]NOTION_TWS​
-							<span style="opacity:.7; font-weight:800; font-size:12px;">— ${dur}s</span>
-						</div>
-						<div class="small" style="margin-top:6px;">
-							الشخصية: <b style="color:rgba(120,198,255,.95);">${safeChar}</b>\
-
-							الناشر: <b>${safeMember}</b>\
-
-							التاريخ: ${escapeHtml(formatTime(e.createdAt))}
-						</div>
-
-						<div style="margin-top:10px; display:grid; gap:10px;">
-							<video controls preload="metadata" style="width:100%; border-radius:14px; border:1px solid rgba(120,198,255,.14); background:rgba(0,0,0,.25);">
-								<source src="${safeUrl}">
-							</video>
-
-							<div class="actions" style="margin-top:0;">
-								<a class="btn" href="${safeUrl}" download target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-flex; justify-content:center; align-items:center;">
-									⬇ تنزيل الإيديت
-								</a>
-								<a class="btn secondary" href="${safeUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-flex; justify-content:center; align-items:center;">
-									🔗 فتح الرابط
-								</a>
-							</div>
-						</div>
-					</div>
-				`;
-			}).join("");
-		}
-
-		/* ======================
 		   Emperor Modal + Panel
 		====================== */
 		const EMPEROR_PASSWORD = "rayan";
-		let modalMode = null; // "emperor" | "ach_admin"
+		let modalMode = null; // "emperor"
 
 		function showEmperorModal(){
 			modalMode = "emperor";
@@ -1504,19 +960,10 @@
 				toast("تم فتح لوحة الإمبراطور ✅");
 				return;
 			}
+		}
 
-			if(modalMode === "ach_admin"){
-				if(pass !== ACH_ADMIN_PASSWORD){
-					if(msg) msg.textContent = "❌ كلمة المرور غير صحيحة.";
-					toast("كلمة المرور غير صحيحة ❌");
-					return;
-				}
-				hideModal();
-				const panel = document.getElementById("achAdminPanel");
-				if(panel) panel.style.display = "block";
-				toast("تم فتح لوحة التعديل ✅");
-				return;
-			}
+		function getMemberById(id){
+			return loadMembers().find(m => m.id === id);
 		}
 
 		function renderRequestsForEmperor(){
@@ -1546,13 +993,10 @@
 							</div>
 							<div style="opacity:.85; font-size:13px; margin-bottom:10px; line-height:1.8;">
 								المهمة: <b>${escapeHtml(r.taskLabel)}</b>\
-\
 
 								المكافأة: <b style="color:rgba(120,198,255,.95);">+${r.xp} XP</b>\
-\
 
 								اليوم: <b>${escapeHtml(r.dayKey)}</b>\
-\
 
 								وقت الإرسال: ${escapeHtml(formatTime(r.createdAt))}
 							</div>
@@ -1598,23 +1042,6 @@
 
 			renderCurrentMember();
 			renderMyRequests();
-
-			// (اختياري) تسجيل إنجاز تلقائي من الموافقات داخل سجل الإنجازات
-			const achMap = loadAchievementsMap();
-			if(!Array.isArray(achMap[m.id])) achMap[m.id] = [];
-			achMap[m.id].unshift({
-				id: cryptoRandomId(),
-				title: `إنجاز مهمة: ${r.taskLabel}`,
-				note: `تمت الموافقة وإضافة +${r.xp} XP`,
-				createdAt: new Date().toISOString(),
-				createdBy: "system"
-			});
-			saveAchievementsMap(achMap);
-
-			// إذا العضو الحالي هو نفسه، حدث صفحة الإنجازات لو مفتوحة
-			if(document.getElementById("achievements")?.classList.contains("active") && getCurrentMemberId() === m.id){
-				renderAchievementsForMember(m.id);
-			}
 		}
 
 		function rejectRequest(requestId){
@@ -1733,27 +1160,23 @@
 		}
 
 		/* ======================
-		   Export / Import (Members + Requests + Achievements + Edits)
+		   Export / Import (Members + Requests)
 		====================== */
 		function exportData(){
 			const membersRaw = localStorage.getItem(STORAGE_KEY) || "";
 			const requestsRaw = localStorage.getItem(REQUESTS_KEY) || "";
-			const achRaw = localStorage.getItem(ACH_KEY) || "";
-			const editsRaw = localStorage.getItem(EDITS_KEY) || "";
-			if(!membersRaw && !requestsRaw && !achRaw && !editsRaw){ toast("لا يوجد بيانات للتصدير"); return; }
+			if(!membersRaw && !requestsRaw){ toast("لا يوجد بيانات للتصدير"); return; }
 
 			const payload = encode({
 				members: membersRaw,
 				requests: requestsRaw,
-				achievements: achRaw,
-				edits: editsRaw,
-				version: "v2",
+				version: "v1",
 				exportedAt: new Date().toISOString()
 			});
 
 			navigator.clipboard.writeText(payload).then(() => {
 				toast("تم نسخ بيانات المملكة ✅");
-				alert("تم نسخ (الأعضاء + الطلبات + الإنجازات + الإيديتات) للحافظة.\nاحتفظ بها في مكان آمن.");
+				alert("تم نسخ (الأعضاء + الطلبات) للحافظة.\nاحتفظ بها في مكان آمن.");
 			}).catch(() => alert("تعذر نسخ البيانات تلقائيًا."));
 		}
 
@@ -1769,15 +1192,11 @@
 
 			if(typeof decoded.members === "string") localStorage.setItem(STORAGE_KEY, decoded.members);
 			if(typeof decoded.requests === "string") localStorage.setItem(REQUESTS_KEY, decoded.requests);
-			if(typeof decoded.achievements === "string") localStorage.setItem(ACH_KEY, decoded.achievements);
-			if(typeof decoded.edits === "string") localStorage.setItem(EDITS_KEY, decoded.edits);
 
 			renderRequestsForEmperor();
 			renderEmperorMembers();
 			renderCurrentMember();
 			renderMyRequests();
-			renderEdits();
-			renderAchievementsEmpty();
 
 			toast("تم استيراد البيانات ✅");
 		}
@@ -1833,7 +1252,7 @@
 		});
 
 		/* ======================
-		   Intro Audio Autoplay (fallback)
+		   Intro Audio Autoplay (مع fallback)
 		====================== */
 		(function () {
 			const audio = document.getElementById("introAudio");
@@ -1841,8 +1260,8 @@
 			const btn  = document.getElementById("startAudioBtn");
 			if (!audio) return;
 
-			audio.volume = 0.85;
-			audio.loop = false;
+			audio.volume = 0.85;   // عدّلها كما تريد
+			audio.loop = false;    // true إذا بغيتها تعاود
 
 			async function tryPlay() {
 				try {
@@ -1853,197 +1272,11 @@
 				}
 			}
 
-<section id="legends" class="page">
-
-	<div class="pageHeader">
-		<div class="pill">05 — بوابة الأساطير</div>
-		<h2>بوابة الأساطير</h2>
-		<p>قسم VIP فيه مستويات ونقاط وتطور داخل المملكة.</p>
-	</div>
-
-	<div class="card">
-
-		<!-- الإحصائيات -->
-		<div class="stats">
-
-			<div class="stat">
-				<b>الرتبة: نجمي ✦</b>
-				<small>كل تفاعل يرفع مستواك.</small>
-			</div>
-
-			<div class="stat">
-				<b>الطاقة: 78%</b>
-				<small>نشاط جيد هذا الأسبوع.</small>
-			</div>
-
-			<div class="stat">
-				<b>VIP: مفتوحة</b>
-				<small>يمكنك طلب الانضمام.</small>
-			</div>
-
-		</div>
-
-		<!-- شريط التقدم -->
-		<div class="progressWrap">
-
-			<div class="progressTop">
-				<span>التقدم نحو رتبة أسطوري</span>
-				<span>72%</span>
-			</div>
-
-			<div class="bar">
-				<span></span>
-			</div>
-
-		</div>
-
-		<!-- الأزرار -->
-		<div class="actions">
-
-			<button class="btn" onclick="openWA('212720097123')">
-				✨ طلب انضمام VIP
-			</button>
-
-			<button class="btn secondary" onclick="go('home')">
-				↩ الرجوع
-			</button>
-
-		</div>
-
-	</div>
-
-</section>
-<section id="rules" class="page">
-
-	<div class="pageHeader">
-		<div class="pill">03 — القوانين</div>
-		<h2>قوانين المملكة</h2>
-		<p>هدفها تنظيم السير داخل المجتمع.</p>
-	</div>
-
-	<div class="card">
-
-		<div style="color:rgba(120,198,255,.95);font-weight:900;margin-bottom:8px">
-			🪽 المخالفات
-		</div>
-
-		<ul class="list">
-			<li>إرسال رسائل مزعجة</li>
-			<li>سب أو إهانة</li>
-			<li>روابط عشوائية</li>
-			<li>صور غير لائقة</li>
-			<li>عنصرية</li>
-			<li>+18</li>
-		</ul>
-	</div>
-
-	<div class="card">
-
-		<div style="color:rgba(120,198,255,.95);font-weight:900;margin-bottom:8px">
-			⚖️ العقوبات
-		</div>
-
-		<ul class="list">
-			<li>1 إنذار = تنبيه</li>
-			<li>2 إنذار = طرد مؤقت</li>
-			<li>3 إنذارات = طرد نهائي</li>
-		</ul>
-
-	</div>
-
-</section>
-<section id="leaders" class="page">
-
-	<div class="pageHeader">
-		<div class="pill">04 — الهيكل القيادي</div>
-		<h2>الإدارة العليا</h2>
-		<p>الواجهة الرسمية لقيادات المملكة. للتواصل أو الاستفسار.</p>
-	</div>
-
-	<!-- الإمبراطور -->
-	<div class="card leaderCard">
-		<img class="avatar" src="https://i.ibb.co/b5FbXxmW/IMG-20260414-WA0219.jpg" />
-		<div>
-			<div class="rolePill">الإمبراطور 🌑</div>
-			<div class="leaderName">خوف 🪐</div>
-			<p class="leaderDesc">المسؤول عن التوجيه العام للمملكة.</p>
-
-			<div class="actions">
-				<button class="btn secondary" onclick="copyText('0720097123', this)">📋 نسخ الرقم</button>
-				<button class="btn" onclick="openWA('212720097123')">واتساب</button>
-			</div>
-		</div>
-	</div>
-
-	<!-- نائب -->
-	<div class="card leaderCard">
-		<img class="avatar" src="https://i.ibb.co/NbNtTnB/IMG-20260330_WA0084.jpg" />
-		<div>
-			<div class="rolePill">نائب الإمبراطور 🔥</div>
-			<div class="leaderName">يامي</div>
-
-			<div class="actions">
-				<button class="btn secondary" onclick="copyText('785478016', this)">📋 نسخ الرقم</button>
-				<button class="btn" onclick="openWA('212785478016')">واتساب</button>
-			</div>
-		</div>
-	</div>
-
-	<!-- نائب ثاني -->
-	<div class="card leaderCard">
-		<img class="avatar" src="https://i.ibb.co/FbMkDLHT/IMG-20260410-WA0269.jpg" />
-		<div>
-			<div class="rolePill">نائب ثاني ⚡</div>
-
-			<div class="actions">
-				<button class="btn secondary" onclick="copyText('01005580454', this)">📋 نسخ الرقم</button>
-				<button class="btn" onclick="openWA('201005580454')">واتساب</button>
-			</div>
-		</div>
-	</div>
-
-</section>
-
-<div class="bigCard">
-
-	<div class="bigCardInner">
-
-		<!-- الزوايا الزينة -->
-		<div class="corner tl"></div>
-		<div class="corner tr"></div>
-		<div class="corner bl"></div>
-		<div class="corner br"></div>
-
-		<!-- العنوان -->
-		<div class="pill" style="margin-bottom:10px">
-			بوابة خاصة داخل المملكة
-		</div>
-
-		<div class="bigTitle">
-			بيانات نقابات المملكة
-		</div>
-
-		<p class="bigDesc">
-			ادخل إلى السجل الذي يعرض تفاعل النقابات ورسائلها وإحصاءاتها.
-		</p>
-
-		<!-- الزر الدائري -->
-		<div style="display:flex; justify-content:center; margin-top:14px;">
-			
-			<div class="spark"
-				onclick="openLink('https://chat.whatsapp.com/ItKpEUc5EJAD6s0ksHBBQZ?mode=hqctcla')"
-				title="الدخول">
-				✦
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
 			window.addEventListener("load", tryPlay);
+
+			// أول تفاعل من المستخدم يفتح الصوت إذا كان blocked
 			window.addEventListener("pointerdown", tryPlay, { once: true });
+
 			if (btn) btn.addEventListener("click", tryPlay);
 		})();
 
